@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-blue-green
+  namespace: argocd
+spec:
+  destination:
+    namespace: demo-blue-green
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://github.com/timusri/argo-rollouts-demo.git"
+    targetRevision: main
+    path: blue-green
+  project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        maxDuration: 3m0s
+        factor: 2
