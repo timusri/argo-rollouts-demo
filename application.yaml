@@ -14,4 +14,13 @@ spec:
   project: default
   syncPolicy:
     automated:
+      selfHeal: true
       prune: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        maxDuration: 3m0s
+        factor: 2

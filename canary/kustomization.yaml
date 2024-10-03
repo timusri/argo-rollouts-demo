@@ -3,6 +3,6 @@ kind: Kustomization
 namespace: demo-canary
 
 resources:
-  - ./service.yaml
-  - ./rollouts.yaml
-  - ./service.yaml
+  - namespace.yaml
+  - rollouts.yaml
+  - service.yaml
